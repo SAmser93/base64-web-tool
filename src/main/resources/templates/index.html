@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>gzip base64 web Decompiler</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" >
+    <link rel="stylesheet" href="./css/main.css"/>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/main.js"></script>
+</head>
+<body>
+<div class="row">
+    <fieldset>
+        <legend>Compress</legend>
+        <div class="control-group">
+            <label class="control-label" for="Text">Text</label>
+            <div class="controls" >
+                <textarea rows="4" style="width:100%; min-width: 600px;" id="text"></textarea>
+            </div>
+            <div class="btn-group" id="actionButton">
+<!--                <button class="btn btn-primary btn-sm" type="button" onclick="process('encodeGzip')" >Compress</button>-->
+<!--                <button class="btn btn-primary btn-sm" type="button" onclick="process('decodeGzip')" >Decompress</button>-->
+                <button class="btn btn-primary btn-sm" type="button" onclick="process('encodeBase64')" >Compress</button>
+                <button class="btn btn-primary btn-sm" type="button" onclick="process('decodeBase64')" >Decompress</button>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="Result">Result</label>
+            <div class="controls">
+                <textarea rows="4" style="width:100%; min-width: 600px;" id="result"></textarea>
+                Execution time: <span id="txtExecutionTime" class="data"></span> ms
+            </div>
+        </div>
+    </fieldset>
+</div>
+</body>
+</html>
