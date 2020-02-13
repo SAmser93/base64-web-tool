@@ -17,6 +17,11 @@ import ru.sem.decoder.Services.GZIPBase64EncoderService;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+    TODO:
+    1. Add GZIP to front
+    2. README
+ */
 
 @RestController
 @RequestMapping("/rest")
