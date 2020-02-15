@@ -24,7 +24,7 @@ version = '0.0.1'
 sourceCompatibility = 1.8
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
-def tomcatFolder = "E:\\apache-tomcat-8.5.37\\webapps"
+def tomcatFolder = "E:\\apache-tomcat-8.5.51\\webapps"
 def warName = 'semBaseDecoder'
 
 repositories {
@@ -62,7 +62,7 @@ task cleanAll {
 
 war {
     //baseName = warName
-    archiveName=warName+".war"
+    archiveFileName = warName+".war"
     enabled = true
 }
 

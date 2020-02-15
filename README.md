@@ -1,12 +1,14 @@
 # Base64 Decoder
 
-Section under construction
-
+This project was purposed to help some members of QA-Department with Base64 and Gzip Encoding/Decoding so that 
+documents information wouldn't be leaked to some unknown owners of online-services. Application was supposed to be
+used with Tomcat web server so it has some .war-building Gradle scripts. 
+Plus it helped me to play around with Gradle instead of Maven.  
 ---
 
 ### Prerequisites
 
-Section under construction
+Project requires Java 1.8 and Tomcat 8.0+
 
 ## Getting Started
 
@@ -17,15 +19,22 @@ git clone https://github.com/SAmser93/base64-web-tool
 
 ### Installing
 
-Section under construction
+To build .war package use "war" Gradle task
+
+```gradle war```
 
 ## Deployment
 
-Section under construction
+To deploy to Tomcat set up "tomcatFolder" parameter in build.gradle file, then run
+
+```gradle war copyWar```
 
 ## Built With
 
-Section under construction
+* Java 1.8 - for backend
+* Gradle - for dependencies and build tasks
+* SpringBoot - for Web application controllers
+* HTML, CSS, JS and jQuery - for front-end 
 
 ## Authors
 
@@ -34,7 +43,3 @@ Section under construction
 ## License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-Section under construction
