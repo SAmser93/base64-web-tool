@@ -1,6 +1,7 @@
-function process(type) {
+function process(mode) {
 
     var text = jQuery('#text').val().trim();
+    var format = jQuery('#selection').val().trim().toLowerCase();
     var result = jQuery('#result');
     var executionTime = jQuery('#txtExecutionTime');
 
@@ -16,7 +17,7 @@ function process(type) {
         type: 'POST',
         contentType: "application/json; charset=utf-8",
         cache: false,
-        url: 'rest/' + type + '/',
+        url: 'rest/' + format + "/" + mode + '/',
         data: data,
         async: true,
         success: function (data) {

@@ -5,5 +5,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.Map;
 
 public interface DecoderInterface {
-    ResponseEntity<?> run(Map<?,?> params);
+    int BUFFER_SIZE = 32;
+    ResponseEntity<?> encode(Map<?,?> params);
+    ResponseEntity<?> decode(Map<?,?> params);
 }

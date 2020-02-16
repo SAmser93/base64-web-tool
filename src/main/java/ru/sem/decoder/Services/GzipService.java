@@ -8,27 +8,60 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 @Service
-public class GZIPBase64DecoderService implements DecoderInterface {
+public class GzipService implements DecoderInterface {
 
-    private Logger logger = LogManager.getLogger(GZIPBase64DecoderService.class);
+    private Logger logger = LogManager.getLogger(GzipService.class);
 
     @Override
-    public ResponseEntity<?> run(Map<?, ?> params){
+    public ResponseEntity<?> encode(Map<?, ?> params){
+        JSONObject body = new JSONObject(params.get("body").toString());
+        String toEncode = body.get("data").toString();
+        JSONObject response = new JSONObject();
+        try{
+            long startTime = System.currentTimeMillis();
+
+            ByteArrayOutputStream bos = new ByteArrayOutputStream(toEncode.length());
+            GZIPOutputStream gzip = new GZIPOutputStream(bos);
+
+            // Compress the input string
+            gzip.write(toEncode.getBytes());
+            gzip.close();
+            byte[] compressed = bos.toByteArray();
+            bos.close();
+
+            logger.info("compressed before base64: {}",new String(compressed));
+
+            // Convert to base64
+            compressed = java.util.Base64.getEncoder().encode(compressed);
+
+            response.put("resultData",new String(compressed));
+            response.put("elapsedTime",System.currentTimeMillis()-startTime);
+            logger.info("final response: {}",response);
+            return new ResponseEntity<Object>(response.toString(), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            response.put("errorMessage",e.getMessage());
+            logger.info("final error: {}",response);
+            return new ResponseEntity<Object>(response.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> decode(Map<?, ?> params){
         JSONObject body = new JSONObject(params.get("body").toString());
         String toDecode = body.get("data").toString();
         JSONObject response = new JSONObject();
         try{
             long startTime = System.currentTimeMillis();
             // get the bytes for the compressed string
-
-            //Если вдруг попадётся иная реализация BASE64
-
 
             byte[] compressed = toDecode.getBytes(StandardCharsets.UTF_8);
 
@@ -37,27 +70,20 @@ public class GZIPBase64DecoderService implements DecoderInterface {
             compressed = d.decode(compressed);
 
             // decode.
-            final int BUFFER_SIZE = 32;
-
             ByteArrayInputStream is = new ByteArrayInputStream(compressed);
-
             GZIPInputStream gis = new GZIPInputStream(is, BUFFER_SIZE);
-
             StringBuilder string = new StringBuilder();
-
             byte[] data = new byte[BUFFER_SIZE];
 
             int bytesRead;
-
             while ((bytesRead = gis.read(data)) != -1)
             {
                 string.append(new String(data, 0, bytesRead));
             }
             gis.close();
             is.close();
-            long endTime = System.currentTimeMillis();
             response.put("resultData",string);
-            response.put("elapsedTime",endTime-startTime);
+            response.put("elapsedTime",System.currentTimeMillis()-startTime);
             logger.info("final response: {}",response);
             return new ResponseEntity<Object>(response.toString(), HttpStatus.OK);
         }catch (Exception e){

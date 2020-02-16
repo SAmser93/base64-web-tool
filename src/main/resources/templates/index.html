@@ -1,27 +1,31 @@
 <!DOCTYPE HTML>
-<html>
+<html LANG="HTML">
 <head>
     <title>gzip base64 web Decompiler</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="./css/bootstrap.min.css" >
-    <link rel="stylesheet" href="./css/main.css"/>
+    <link rel="stylesheet" href="./css/main.css"/>s
     <script src="./js/jquery.min.js"></script>
     <script src="./js/main.js"></script>
 </head>
 <body>
 <div class="row">
     <fieldset>
-        <legend>Compress</legend>
+        <legend>Base 64 Tool</legend>
         <div class="control-group">
             <label class="control-label" for="Text">Text</label>
             <div class="controls" >
                 <textarea rows="4" style="width:100%; min-width: 600px;" id="text"></textarea>
             </div>
+            <div style="margin-bottom: 5px">
+                <select id="selection">
+                    <option>Base64</option>
+                    <option>Gzip</option>
+                </select>
+            </div>
             <div class="btn-group" id="actionButton">
-<!--                <button class="btn btn-primary btn-sm" type="button" onclick="process('encodeGzip')" >Compress</button>-->
-<!--                <button class="btn btn-primary btn-sm" type="button" onclick="process('decodeGzip')" >Decompress</button>-->
-                <button class="btn btn-primary btn-sm" type="button" onclick="process('encodeBase64')" >Compress</button>
-                <button class="btn btn-primary btn-sm" type="button" onclick="process('decodeBase64')" >Decompress</button>
+                <button class="btn btn-primary btn-sm" type="button" onclick="process('encode')">Compress</button>
+                <button class="btn btn-primary btn-sm" type="button" onclick="process('decode')">Decompress</button>
             </div>
         </div>
         <div class="control-group">
